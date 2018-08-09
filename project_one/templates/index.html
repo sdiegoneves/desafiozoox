@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="myApp" >
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+<body ng-controller="statelist">
+	<table>
+	  <tr ng-repeat="items in states">
+	    <td>{{items.id}}</td>
+	    <td>{{items.name}}</td>
+	  </tr>
+	</table>
+ 
+<script>
+
+var app = angular.module('myApp', []);
+app.controller('statelist', function($scope, $http) {
+   $http.get("list/?format=json").then(function (response) {
+   		$scope.states = response
+   	}, function(err) {
+        console.error("Error occured: ", err);
+    });
+});
+</script>
+</body>
+</html>
